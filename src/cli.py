@@ -5,6 +5,7 @@ from .modeswitch import switch_to_modem_mode
 from .at_client import ModemATClient
 from .diag_client import QualcommDiagClient
 from .forensic import ForensicScanner
+from .nv_backup import backup_nvram_range
 
 def cmd_modeswitch(args):
     print(f"[*] Issuing SCSI mode switch to volume {args.drive}: ...")
@@ -87,6 +88,10 @@ def cmd_nv(args):
         ascii_val = "".join([chr(b) for b in data if 32 <= b <= 126]).strip()
         print(f"ASCII: '{ascii_val}'")
 
+def cmd_backup_nv(args):
+    diag = QualcommDiagClient(port=args.diag_port)
+    backup_nvram_range(diag, start_id=args.start, end_id=args.end, output_file=args.output)
+
 def main():
     parser = argparse.ArgumentParser(description="ZTE MSM6020 CDMA Modem Hardware Control & Diagnostic Toolkit")
     subparsers = parser.add_subparsers(dest="subcommand", required=True)
@@ -119,6 +124,14 @@ def main():
     p_nv.add_argument("item", type=int, help="NVRAM Item ID (e.g., 0 for ESN, 71 for MIN1, 197 for MDN)")
     p_nv.add_argument("--diag-port", default="COM16")
     p_nv.set_defaults(func=cmd_nv)
+
+    # backup-nv
+    p_backup = subparsers.add_parser("backup-nv", help="Backup full NVRAM item range to a JSON file")
+    p_backup.add_argument("--diag-port", default="COM16")
+    p_backup.add_argument("--start", type=int, default=0, help="Starting NV Item ID (default: 0)")
+    p_backup.add_argument("--end", type=int, default=300, help="Ending NV Item ID (default: 300)")
+    p_backup.add_argument("--output", default="nvram_backup.json", help="Output JSON filename")
+    p_backup.set_defaults(func=cmd_backup_nv)
 
     args = parser.parse_args()
     args.func(args)
