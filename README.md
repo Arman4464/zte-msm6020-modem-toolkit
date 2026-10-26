@@ -54,7 +54,8 @@ zte-modem-toolkit/
     ├── 02_PROTOCOL_AND_COMMAND_MAP.md
     ├── 03_FORENSIC_AUDIT_REPORT.md
     ├── 04_QUALCOMM_QPST_QXDM_GUIDE.md
-    └── 05_RECOMMENDED_USE_CASES.md
+    ├── 05_RECOMMENDED_USE_CASES.md
+    └── 06_SDR_LAB_AND_CELL_TOWER_GUIDE.md
 ```
 
 ---
@@ -142,6 +143,7 @@ Detailed technical documentation is provided in the [`docs/`](docs/) directory:
 * [Forensic Audit Report](docs/03_FORENSIC_AUDIT_REPORT.md): Data hygiene, NVRAM memory audit, and sanitized storage verification.
 * [Qualcomm QPST & QXDM Guide](docs/04_QUALCOMM_QPST_QXDM_GUIDE.md): Setup instructions for EFS Explorer and protocol logging.
 * [Recommended Use Cases](docs/05_RECOMMENDED_USE_CASES.md): Private Software-Defined Radio (SDR) lab, embedded communications testing, and firmware reverse engineering.
+* [Private SDR Cell Tower Guide](docs/06_SDR_LAB_AND_CELL_TOWER_GUIDE.md): Hardware wiring, OpenBTS/Asterisk PBX configuration, and conducted RF lab testing.
 
 ---
 
